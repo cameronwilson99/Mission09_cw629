@@ -10,22 +10,7 @@
 @*Pulls books from the view model and iterates through each book, creating a different block for each book*@
 @foreach (Book b in Model.Books)
 {
-    <div class="card card-outline-primary m-1 p-1">
-        <div class="bg-faded p-1">
-            <h3>@b.Title</h3>
-
-            <ul>
-                <li>Author: @b.Author</li>
-                <li>Publisher: @b.Publisher</li>
-                <li>ISBN: @b.Isbn</li>
-                <li>Classification: @b.Classification</li>
-                <li>Category: @b.Category</li>
-                <li>Page Count: @b.PageCount Pages</li>
-                <li>Price: $@b.Price</li>
-            </ul>
-            <br />
-        </div>
-    </div>
+    <partial name="BookSummary" model="b"/>
 }
 
 @*dynamically creates page number tags, styled using the pagination tag helper class and created dynamically based on the pageinfo view model*@

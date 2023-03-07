@@ -36,6 +36,13 @@ namespace Bookstore
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            //enables use of razor pages
+            services.AddRazorPages();
+
+            //allows the use of sessions (keep cart full for user during session)
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,9 +58,25 @@ namespace Bookstore
 
             app.UseRouting();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
+                //passes both the category and the page number to the url to be routed, dynamically changing the data visualization
+                endpoints.MapControllerRoute("CategoryPage", "{bookCategory}/Page{pageNum}", new { controller = "Home", action = "Index" });
+
+                //executes endpoints, changes the url depending on the page selected.
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Index", pageNum=1});
+
+                //used for when only a category is given, sets the page number to the first page so we aren't stuck on another page when we change categories
+                endpoints.MapControllerRoute("Category", "{bookCategory}", new { controller="Home", action = "Index", pageNum=1});
+
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages(); //allows razor pages to be displayed
             });
         }
     }

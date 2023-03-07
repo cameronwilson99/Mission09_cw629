@@ -18,7 +18,9 @@ namespace Bookstore.Controllers
         {
             repo = temp;
         }
-        public IActionResult Index(int pageNum = 1)
+        
+        // takes category chossen and page number to return queried selection of books
+        public IActionResult Index(string bookCategory, int pageNum = 1)
         {
             // defines the amount of results on a page
             int pageSize = 10;
@@ -27,6 +29,7 @@ namespace Bookstore.Controllers
             var x = new BooksViewModel
             {
                 Books = repo.Books
+                .Where(p => p.Category == bookCategory || bookCategory == null)
                 .OrderBy(p => p.Title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
@@ -34,7 +37,8 @@ namespace Bookstore.Controllers
                 // defines the pages and number of books on the page
                 PageInfo = new PageInfo
                 {
-                    TotalNumBooks = repo.Books.Count(),
+                    // total number of books depends on the category selected, or if there is one selected at all
+                    TotalNumBooks = (bookCategory == null ? repo.Books.Count() : repo.Books.Where(x => x.Category == bookCategory).Count()),
                     BooksPerPage = pageSize,
                     CurrentPage = pageNum
                 }
