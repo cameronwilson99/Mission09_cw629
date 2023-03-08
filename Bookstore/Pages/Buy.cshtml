@@ -1,0 +1,39 @@
+﻿@page
+@model Bookstore.Pages.BuyModel
+@{
+}
+
+<h2>Your Cart</h2>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Cost</th>
+        <th>Subtotal</th>
+    </thead>
+
+    <tbody>
+        @foreach (var i in Model.cart.Items)
+        {
+        <tr>
+            <td>@i.book.Title</td>
+            <td>@i.Quantity</td>
+            <td>$@i.book.Price</td>
+            <td>$@(i.Quantity * i.book.Price)</td>
+        </tr>
+        }
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="3">Total:</td>
+            <td>@Model.cart.CalcTotal().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div>
+    @*creates a button that will send the user back where they came from using the return url packaged in the booksummary*@
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Back to Shopping</a>
+</div>

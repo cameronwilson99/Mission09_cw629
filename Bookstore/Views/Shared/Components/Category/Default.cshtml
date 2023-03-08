@@ -1,0 +1,18 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*Easily and efficiently loops through the data*@
+@model IEnumerable<string>
+
+<div class="d-grid gap-2">
+    <a asp-controller="Home" asp-action="Index" asp-route-bookCategory="" asp-route-pageNum="1" class="btn btn-block btn-dark">Home</a>
+
+    @foreach (string c in Model)
+    {
+        //tells controller to look for categories and pass certain routes depending on those categories. Also takes the selected item and changes it's css (fancy if statment)
+        <a asp-controller="Home" asp-action="Index" asp-route-bookCategory="@c" asp-route-pageNum="1" class="btn btn-outline-primary @(ViewBag.SelectedCategory == c ? "btn-primary" : "btn-outline-primary")">@c</a>
+    }
+
+</div>
