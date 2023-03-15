@@ -36,6 +36,7 @@ namespace Bookstore
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+            services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
 
             //enables use of razor pages
             services.AddRazorPages();
@@ -43,6 +44,11 @@ namespace Bookstore
             //allows the use of sessions (keep cart full for user during session)
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            //pulls in a cart for the session use
+            services.AddScoped<Cart>(x => SessionCart.GetCart(x));
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

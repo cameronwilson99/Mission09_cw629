@@ -7,10 +7,10 @@
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha512-ZYg+hQvLlM0W9C3P6vTpes5LmJ66G2EsroxDNzwD6qiulckldb29eD9I672HL2X+LH5nRhY1sQqZLJGB+aUUPg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
-        @*adjusted the style of the navbar using bootstrap*@
         <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm bg-dark text-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand text-white ml-2" asp-area="" asp-page="/Index">Bookstore</a>
@@ -25,9 +25,12 @@
                         </li>
                     </ul>
                 </div>
-                <span class="navbar-text text-white-50">
-                    Read what Hilton's Reading
-                </span>
+                <div class="col-2 text-right">
+                    <vc:cart-summary />
+                </div>
+                @*<span class="navbar-text text-white-50">
+            Read what Hilton's Reading
+        </span>*@
             </div>
         </nav>
     </header>

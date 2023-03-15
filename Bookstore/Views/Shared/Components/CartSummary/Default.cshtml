@@ -1,0 +1,22 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Cart
+@*displays a button with the Font Awesome cart icon and, if there are items in the cart, 
+    provides a snapshot that details the number of items and their total value. *@
+<div class="">
+    @if (Model.Items.Count() > 0)
+    {
+        <small class="navbar-text">
+            <b>Your cart:</b>
+            @Model.Items.Sum(x => x.Quantity) item(s)
+            @Model.CalcTotal().ToString("c")
+        </small>
+    }
+    <a class="btn btn-sm btn-secondary navbar-btn" asp-page="/Buy"
+       asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+        <i class="fa fa-shopping-cart"></i>
+    </a>
+</div>

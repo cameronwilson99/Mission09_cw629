@@ -22,5 +22,6 @@ namespace Bookstore.Models
 
         //creates database set of books, allows CRUD operations on the data
         public DbSet<Book> Books { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
     }
 }
