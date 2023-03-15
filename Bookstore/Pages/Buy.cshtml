@@ -21,6 +21,15 @@
             <td>@i.Quantity</td>
             <td>$@i.book.Price</td>
             <td>$@(i.Quantity * i.book.Price)</td>
+
+            <td class="text-center">
+                <form method="post" asp-page-handler="Remove">
+                    @*gets the id and return url of the book attached to the delete button*@
+                    <input type="hidden" name="bookId" value="@i.book.BookId" />
+                    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                    <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                </form>
+            </td>
         </tr>
         }
     </tbody>
@@ -35,5 +44,6 @@
 
 <div>
     @*creates a button that will send the user back where they came from using the return url packaged in the booksummary*@
-    <a class="btn btn-primary" href="@Model.ReturnUrl">Back to Shopping</a>
+    <a class="btn btn-outline-primary" href="@Model.ReturnUrl">Back to Shopping</a>
+    <a class="btn btn-primary" asp-controller="Purchase" asp-action="Checkout">Checkout</a>
 </div>
